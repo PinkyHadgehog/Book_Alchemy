@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+</head>
+<body>
+
+<h1>My Library</h1>
+
+<a href="/?sort=title">
+    <button>Sort by Title</button>
+</a>
+
+<a href="/?sort=author">
+    <button>Sort by Author</button>
+</a>
+
+<br><br>
+
+{% for book in books %}
+    <p>{{ book.title }} — {{ book.author.name }}</p>
+{% endfor %}
+
+</body>
+</html>

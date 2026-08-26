@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+</head>
+<body>
+    <h1>Add Book</h1>
+
+    {% if success %}
+    <p>Book successfully added!</p>
+{% endif %}
+
+    <form method="POST">
+        <label>ISBN: </label>
+        <input type="text" name="isbn" required>
+
+        <br><br>
+
+        <label>Title:</label>
+        <input type="text" name="title" required>
+
+        <br><br>
+
+        <label>Publication year:</label>
+        <input type="number" name="publication_year" required>
+
+        <br><br>
+
+        <label>Author:</label>
+
+        <select name="author_id" required>
+            <option value="" disabled selected>Select an author</option>
+
+            {% for author in authors %}
+                <option value="{{ author.id }}">
+                    {{ author.name }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+        <br><br>
+
+    <button type="submit">Add Book</button>
+    </form>
+
+</body>
+</html>
