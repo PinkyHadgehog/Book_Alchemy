@@ -1,20 +1,77 @@
-<form method="POST">
+{% extends "base.html" %}
 
-    <label>Name:</label>
-    <input type="text" name="name" required>
+{% block title %}Add Author{% endblock %}
 
-    <br><br>
+{% block content %}
 
-    <label>Birth date:</label>
-    <input type="date" name="birth_date" required>
+<div class="form-page">
 
-    <br><br>
+    <div class="form-card">
 
-    <label>Date of death:</label>
-    <input type="date" name="date_of_death">
+        <h1>Add Author</h1>
 
-    <br><br>
+        <p class="form-description">
+            Add a new author to your library.
+        </p>
 
-    <button type="submit">Add Author</button>
 
-</form>
+        {% if success %}
+            <div class="success-message">
+                Author successfully added!
+            </div>
+        {% endif %}
+
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label>Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="e.g. Franz Kafka"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Birth date</label>
+
+                <input
+                    type="date"
+                    name="birth_date"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Date of death</label>
+
+                <input
+                    type="date"
+                    name="date_of_death"
+                >
+
+                <small>
+                    Leave empty if the author is still alive.
+                </small>
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                Add Author
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

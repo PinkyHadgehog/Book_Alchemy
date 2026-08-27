@@ -1,0 +1,407 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f6f7f9;
+    color: #222;
+}
+
+/* -------------------------
+   Navigation
+------------------------- */
+
+.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e2e2;
+    padding: 18px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #222;
+}
+
+.navbar nav {
+    display: flex;
+    gap: 24px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+}
+
+.navbar nav a:hover {
+    color: #000;
+}
+
+/* -------------------------
+   Main layout
+------------------------- */
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 30px;
+}
+
+/* -------------------------
+   Hero
+------------------------- */
+
+.hero {
+    margin-bottom: 35px;
+}
+
+.hero h1 {
+    margin: 0 0 8px;
+    font-size: 42px;
+}
+
+.hero p {
+    margin: 0;
+    color: #666;
+    font-size: 18px;
+}
+
+/* -------------------------
+   Search + sorting
+------------------------- */
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    margin-bottom: 30px;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-form input {
+    min-width: 280px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px 14px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #777;
+}
+
+button,
+.primary-button,
+.secondary-button,
+.sort-buttons a {
+    border: none;
+    border-radius: 8px;
+
+    padding: 11px 18px;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+button,
+.primary-button {
+    background: #222;
+    color: white;
+}
+
+button:hover,
+.primary-button:hover {
+    opacity: 0.9;
+}
+
+.secondary-button,
+.sort-buttons a {
+    background: #e8e8e8;
+    color: #222;
+}
+
+.secondary-button:hover,
+.sort-buttons a:hover {
+    background: #dcdcdc;
+}
+
+.sort-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.results-info {
+    margin-bottom: 22px;
+    color: #555;
+}
+
+/* -------------------------
+   Book grid
+------------------------- */
+
+.book-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 24px;
+}
+
+/* -------------------------
+   Book card
+------------------------- */
+
+.book-card {
+    background: white;
+    padding: 24px;
+
+    border-radius: 14px;
+    border: 1px solid #e3e3e3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-height: 100%;
+}
+
+.book-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* -------------------------
+   Book cover
+------------------------- */
+
+.book-cover {
+    width: 140px;
+    height: 210px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+    margin-bottom: 18px;
+
+    background: #f0f0f0;
+
+    align-self: center;
+}
+
+/* -------------------------
+   Book info
+------------------------- */
+
+.book-info {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.book-card h2 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.author {
+    margin: 0 0 12px;
+
+    font-weight: bold;
+    color: #555;
+}
+
+.book-info p {
+    margin: 6px 0;
+}
+
+.isbn {
+    font-size: 13px;
+    color: #888;
+}
+
+/* -------------------------
+   Delete button
+------------------------- */
+
+.delete-button {
+    margin-top: 18px;
+
+    background: transparent;
+    color: #b42318;
+
+    border: 1px solid #b42318;
+}
+
+.delete-button:hover {
+    background: #fff1f0;
+}
+
+/* -------------------------
+   Forms
+------------------------- */
+
+.form-page {
+    display: flex;
+    justify-content: center;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 520px;
+
+    background: white;
+    padding: 35px;
+
+    border-radius: 14px;
+    border: 1px solid #ddd;
+}
+
+.form-card h1 {
+    margin-top: 0;
+}
+
+.form-description {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+.form-group small {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #777;
+}
+
+/* -------------------------
+   Success message
+------------------------- */
+
+.success-message {
+    background: #e9f8ee;
+    color: #176b37;
+
+    padding: 12px 16px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+/* -------------------------
+   Empty state
+------------------------- */
+
+.empty-state {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 60px 20px;
+
+    background: white;
+
+    border-radius: 12px;
+    border: 1px solid #e3e3e3;
+}
+
+.empty-state h2 {
+    margin-top: 0;
+}
+
+/* -------------------------
+   Responsive
+------------------------- */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 16px 20px;
+
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 14px;
+    }
+
+    .navbar nav {
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .container {
+        padding: 35px 20px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form {
+        width: 100%;
+    }
+
+    .search-form input {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .sort-buttons {
+        width: 100%;
+    }
+
+    .book-cover {
+        width: 120px;
+        height: 180px;
+    }
+
+    .form-card {
+        padding: 24px;
+    }
+}

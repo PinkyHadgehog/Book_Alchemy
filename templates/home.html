@@ -1,65 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Library</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>My Library</h1>
+{% block title %}Library{% endblock %}
 
-<nav>
-    <a href="/">All Books</a>
-    <a href="/add_author">Add Author</a>
-    <a href="/add_book">Add Book</a>
-</nav>
+{% block content %}
 
-<br>
+<section class="hero">
+    <h1>My Library</h1>
+    <p>Browse, search and manage your book collection.</p>
+</section>
 
-<form method="GET" action="/">
-    <input
-        type="text"
-        name="search"
-        placeholder="Search for a book"
-        value="{{ search }}"
-    >
-    <button type="submit">Search</button>
 
-    {% if search %}
-        <a href="/">Clear search</a>
-    {% endif %}
-</form>
+<section class="toolbar">
 
-<a href="/?sort=title">
-    <button>Sort by Title</button>
-</a>
+    <form method="GET" action="/" class="search-form">
 
-<a href="/?sort=author">
-    <button>Sort by Author</button>
-</a>
+        <input
+            type="text"
+            name="search"
+            placeholder="Search for a book..."
+            value="{{ search }}"
+        >
 
-<br><br>
+        <button type="submit">
+            Search
+        </button>
 
-<!-- Show number of search results -->
+        {% if search %}
+            <a href="/" class="secondary-button">
+                Clear
+            </a>
+        {% endif %}
+
+    </form>
+
+
+    <div class="sort-buttons">
+
+        <a href="/?sort=title&search={{ search }}">
+            Sort by Title
+        </a>
+
+        <a href="/?sort=author&search={{ search }}">
+            Sort by Author
+        </a>
+
+    </div>
+
+</section>
+
+
 {% if search %}
-    <p>{{ books|length }} result(s) found for "{{ search }}"</p>
+    <p class="results-info">
+        {{ books|length }} result(s) found for "{{ search }}"
+    </p>
 {% endif %}
 
-<!-- Display books or empty-state message -->
+
+<section class="book-grid">
+
 {% if books %}
 
     {% for book in books %}
-        <p>
-            {{ book.title }} — {{ book.author.name }}
-        </p>
+
+        <article class="book-card">
+
+            <img
+            src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"
+            alt="Cover of {{ book.title }}"
+            class="book-cover"
+            >
+
+            <div class="book-info">
+
+                <h2>{{ book.title }}</h2>
+
+                <p class="author">
+                    {{ book.author.name }}
+                </p>
+
+                <p>
+                    Published: {{ book.publication_year }}
+                </p>
+
+                <p class="isbn">
+                    ISBN: {{ book.isbn }}
+                </p>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('delete_book', book_id=book.id) }}"
+                onsubmit="return confirm(
+                    'Are you sure you want to delete {{ book.title }} from the library?'
+                );"
+            >
+
+                <button
+                    type="submit"
+                    class="delete-button"
+                >
+                    Delete
+                </button>
+
+            </form>
+
+        </article>
+
     {% endfor %}
 
 {% else %}
 
-    <p>No books found for "{{ search }}".</p>
-    <a href="/">Show all books</a>
+    <div class="empty-state">
+
+        <h2>No books found</h2>
+
+        <p>
+            We couldn't find a book matching "{{ search }}".
+        </p>
+
+        <a href="/" class="primary-button">
+            Show all books
+        </a>
+
+    </div>
 
 {% endif %}
 
-</body>
-</html>
+</section>
+
+{% endblock %}

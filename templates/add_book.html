@@ -1,49 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Book</title>
-</head>
-<body>
-    <h1>Add Book</h1>
+{% extends "base.html" %}
 
-    {% if success %}
-    <p>Book successfully added!</p>
-{% endif %}
+{% block title %}Add Book{% endblock %}
 
-    <form method="POST">
-        <label>ISBN: </label>
-        <input type="text" name="isbn" required>
+{% block content %}
 
-        <br><br>
+<div class="form-page">
 
-        <label>Title:</label>
-        <input type="text" name="title" required>
+    <div class="form-card">
 
-        <br><br>
+        <h1>Add Book</h1>
 
-        <label>Publication year:</label>
-        <input type="number" name="publication_year" required>
+        <p class="form-description">
+            Add a new book to your library.
+        </p>
 
-        <br><br>
 
-        <label>Author:</label>
+        {% if success %}
+            <div class="success-message">
+                Book successfully added!
+            </div>
+        {% endif %}
 
-        <select name="author_id" required>
-            <option value="" disabled selected>Select an author</option>
 
-            {% for author in authors %}
-                <option value="{{ author.id }}">
-                    {{ author.name }}
-                </option>
-            {% endfor %}
+        <form method="POST">
 
-        </select>
+            <div class="form-group">
+                <label>Title</label>
 
-        <br><br>
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="e.g. The Trial"
+                    required
+                >
+            </div>
 
-    <button type="submit">Add Book</button>
-    </form>
 
-</body>
-</html>
+            <div class="form-group">
+                <label>ISBN</label>
+
+                <input
+                    type="text"
+                    name="isbn"
+                    placeholder="978..."
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Publication year</label>
+
+                <input
+                    type="number"
+                    name="publication_year"
+                    placeholder="1925"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Author</label>
+
+                <select name="author_id" required>
+
+                    <option value="" disabled selected>
+                        Select an author
+                    </option>
+
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">
+                            {{ author.name }}
+                        </option>
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                Add Book
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
