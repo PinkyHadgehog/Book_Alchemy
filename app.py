@@ -28,22 +28,35 @@ db.init_app(app)
 @app.route("/")
 def home():
     sort_by = request.args.get("sort", "title")
+    search = request.args.get("search", "")
 
+    query = db.select(Book)
+
+    # Search
+    if search:
+        query = query.where(
+            Book.title.ilike(f"%{search}%")
+        )
+
+    # Sorting by author
     if sort_by == "author":
         query = (
-            db.select(Book)
+            query
             .join(Author, Book.author_id == Author.id)
             .order_by(Author.name)
         )
 
+
     else:
-        query = db.select(Book).order_by(Book.title)
+
+        query = query.order_by(Book.title)
 
     books = db.session.execute(query).scalars().all()
 
     return render_template(
         "home.html",
-        books=books
+        books=books,
+        search=search
     )
 
 @app.route("/add_author", methods = ["GET", "POST"])
