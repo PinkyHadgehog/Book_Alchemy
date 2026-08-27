@@ -2,10 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from sqlalchemy import inspect
 from data_models import db, Author, Book
 from datetime import datetime
+from openai import OpenAI
 
 import os
 
 app = Flask(__name__)
+
+client = OpenAI()
 
 app.config["SECRET_KEY"] = "dev-secret-key"
 
@@ -149,9 +152,70 @@ def delete_book(book_id):
     return redirect(url_for("home"))
 
 
+@app.route("/book/<int:book_id>")
+def book_detail(book_id):
+    book = db.session.get(Book, book_id)
+
+    if book is None:
+        return "Book not found", 404
+
+    return render_template(
+        "book_detail.html",
+        book=book
+    )
+
+
+@app.route("/author/<int:author_id>")
+def author_detail(author_id):
+    author = db.session.get(Author, author_id)
+
+    if author is None:
+        return "Author not found", 404
+
+    return render_template(
+        "author_detail.html",
+        author=author
+    )
+
+
+@app.route("/author/<int:author_id>/delete", methods=["POST"])
+def delete_author(author_id):
+    author = db.session.get(Author, author_id)
+
+    if author is None:
+        return "Author not found", 404
+
+    db.session.delete(author)
+    db.session.commit()
+
+    flash("Author and all associated books successfully deleted!")
+
+    return redirect(url_for("home"))
+
+@app.route("/book/<int:book_id>/rate", methods=["POST"])
+def rate_book(book_id):
+    book = db.session.get(Book, book_id)
+
+    if book is None:
+        return "Book not found", 404
+
+    rating = int(request.form["rating"])
+
+    if rating < 1 or rating > 10:
+        flash("Rating must be between 1 and 10.")
+        return redirect(url_for("book_detail", book_id=book.id))
+
+    book.rating = rating
+
+    db.session.commit()
+
+    flash("Rating successfully saved!")
+
+    return redirect(url_for("book_detail", book_id=book.id))
+
+
 with app.app_context():
     db.create_all()
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

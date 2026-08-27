@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}{{ author.name }}{% endblock %}
+
+{% block content %}
+
+<div class="detail-page">
+
+    <a href="/" class="back-link">
+        ← Back to Library
+    </a>
+
+    <div class="author-header">
+
+        <h1>{{ author.name }}</h1>
+
+        <p>
+            <strong>Born:</strong>
+            {{ author.birth_date }}
+        </p>
+
+        {% if author.date_of_death %}
+            <p>
+                <strong>Died:</strong>
+                {{ author.date_of_death }}
+            </p>
+        {% endif %}
+
+    </div>
+
+
+    <section class="author-books">
+
+        <h2>Books by this author</h2>
+
+        {% if author.books %}
+
+            {% for book in author.books %}
+
+                <a
+                    href="{{ url_for('book_detail', book_id=book.id) }}"
+                    class="author-book-row"
+                >
+
+                    <img
+                        src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-S.jpg"
+                        alt="Cover of {{ book.title }}"
+                    >
+
+                    <div>
+                        <strong>{{ book.title }}</strong>
+                        <span>Published: {{ book.publication_year }}</span>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </a>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No books by this author are currently in the library.</p>
+
+        {% endif %}
+
+    </section>
+
+
+    <section class="danger-zone">
+
+        <div class="danger-zone-content">
+
+            <div class="danger-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <h2>Danger zone</h2>
+
+                <p>
+                    Deleting this author will also permanently delete
+                    all books by this author.
+                </p>
+
+                <p class="danger-warning">
+                    This action cannot be undone.
+                </p>
+
+                <form
+                    method="POST"
+                    action="{{ url_for('delete_author', author_id=author.id) }}"
+                    onsubmit="return confirm('Are you sure you want to delete {{ author.name }} and all books by this author?');"
+                >
+
+                    <button type="submit" class="danger-button">
+                        🗑 Delete author and {{ author.books|length }} book(s)
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

@@ -8,7 +8,12 @@ class Author(db.Model):
     birth_date = db.Column(db.Date, nullable=False)
     date_of_death = db.Column(db.Date, nullable=True)
 
-    books = db.relationship("Book", back_populates="author")
+    books = db.relationship(
+        "Book",
+        back_populates="author",
+        cascade="all, delete-orphan"
+    )
+
 
     def __str__(self):
         return (
@@ -23,12 +28,22 @@ class Author(db.Model):
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    isbn = db.Column(db.String, nullable = False)
-    title = db.Column(db.String, nullable = False)
-    publication_year = db.Column(db.Integer, nullable = False)
-    author_id = db.Column(db.Integer, db.ForeignKey("author.id"), nullable = False)
+    isbn = db.Column(db.String, nullable=False)
+    title = db.Column(db.String, nullable=False)
+    publication_year = db.Column(db.Integer, nullable=False)
 
-    author = db.relationship("Author", back_populates="books")
+    author_id = db.Column(
+        db.Integer,
+        db.ForeignKey("author.id"),
+        nullable=False
+    )
+
+    rating = db.Column(db.Integer, nullable=True)
+
+    author = db.relationship(
+        "Author",
+        back_populates="books"
+    )
 
     def __str__(self):
         return (

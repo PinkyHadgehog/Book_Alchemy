@@ -405,3 +405,332 @@ button:hover,
         padding: 24px;
     }
 }
+
+/* -------------------------
+   Detail pages
+------------------------- */
+
+.detail-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.detail-card {
+    margin-top: 30px;
+
+    background: white;
+    padding: 35px;
+
+    border: 1px solid #e3e3e3;
+    border-radius: 14px;
+
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.detail-cover {
+    width: 220px;
+    height: 330px;
+
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.detail-info {
+    flex: 1;
+}
+
+.detail-info h1 {
+    margin-top: 0;
+    font-size: 36px;
+}
+
+.detail-info a {
+    color: #333;
+}
+
+.book-card h2 a {
+    color: #222;
+    text-decoration: none;
+}
+
+.book-card h2 a:hover {
+    text-decoration: underline;
+}
+
+.author a {
+    color: #555;
+    text-decoration: none;
+}
+
+.author a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+
+    .detail-card {
+        flex-direction: column;
+    }
+
+    .detail-cover {
+        width: 160px;
+        height: 240px;
+    }
+}
+
+.delete-author-button {
+    margin-top: 8px;
+
+    background: transparent;
+    color: #b42318;
+
+    border: 1px solid #b42318;
+    border-radius: 8px;
+
+    padding: 8px 14px;
+
+    cursor: pointer;
+}
+
+.delete-author-button:hover {
+    background: #fff1f0;
+}
+
+/* -------------------------
+   Author links
+------------------------- */
+
+.author a {
+    color: #4c4c78;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.author a:hover {
+    text-decoration: underline;
+}
+
+
+/* -------------------------
+   Delete book
+------------------------- */
+
+.delete-button {
+    margin-top: 20px;
+
+    background: transparent;
+    color: #b42318;
+
+    border: 1px solid #e2a09a;
+    border-radius: 8px;
+
+    padding: 9px 14px;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background: #fff5f4;
+}
+
+
+/* -------------------------
+   Author detail page
+------------------------- */
+
+.detail-page {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 30px;
+
+    text-decoration: none;
+    color: #555;
+}
+
+.back-link:hover {
+    color: #000;
+}
+
+.author-header {
+    background: white;
+
+    padding: 30px;
+
+    border: 1px solid #e3e3e3;
+    border-radius: 14px;
+
+    margin-bottom: 30px;
+}
+
+.author-header h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+
+/* -------------------------
+   Books on author page
+------------------------- */
+
+.author-books {
+    margin-bottom: 40px;
+}
+
+.author-book-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    background: white;
+    color: #222;
+
+    padding: 14px 18px;
+
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+    text-decoration: none;
+}
+
+.author-book-row:hover {
+    border-color: #aaa;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.author-book-row img {
+    width: 50px;
+    height: 70px;
+
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.author-book-row div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    flex-grow: 1;
+}
+
+.author-book-row span {
+    color: #777;
+    font-size: 14px;
+}
+
+.author-book-row .arrow {
+    font-size: 22px;
+    color: #777;
+}
+
+
+/* -------------------------
+   Danger zone
+------------------------- */
+
+.danger-zone {
+    margin-top: 50px;
+
+    padding: 25px;
+
+    background: #fff8f7;
+
+    border: 1px solid #efb4ae;
+    border-radius: 12px;
+}
+
+.danger-zone-content {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+.danger-icon {
+    font-size: 30px;
+}
+
+.danger-zone h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    color: #b42318;
+}
+
+.danger-zone p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.danger-warning {
+    font-weight: bold;
+    color: #b42318 !important;
+}
+
+.danger-button {
+    margin-top: 18px;
+
+    background: #b42318;
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 11px 18px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.danger-button:hover {
+    background: #922018;
+}
+
+
+/* -------------------------
+   Rating
+------------------------- */
+
+.book-rating {
+    margin: 12px 0;
+    font-weight: 700;
+}
+
+.book-rating.not-rated {
+    color: #888;
+    font-weight: 400;
+}
+
+.rating-section {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #e3e3e3;
+}
+
+.current-rating {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 10px 0 18px;
+}
+
+.rating-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.rating-form select {
+    width: auto;
+    min-width: 140px;
+}

@@ -72,11 +72,27 @@
 
             <div class="book-info">
 
-                <h2>{{ book.title }}</h2>
+                <h2>
+                <a href="{{ url_for('book_detail', book_id=book.id) }}">
+                    {{ book.title }}
+                </a>
+                </h2>
 
                 <p class="author">
+                <a href="{{ url_for('author_detail', author_id=book.author.id) }}">
                     {{ book.author.name }}
+                </a>
                 </p>
+
+                {% if book.rating %}
+                <p class="book-rating">
+                    ★ {{ book.rating }}/10
+                </p>
+                {% else %}
+                <p class="book-rating not-rated">
+                    Not rated yet
+                </p>
+                {% endif %}
 
                 <p>
                     Published: {{ book.publication_year }}
