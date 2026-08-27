@@ -1,14 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from sqlalchemy import inspect
+#from sqlalchemy import inspect
 from data_models import db, Author, Book
 from datetime import datetime
-from openai import OpenAI
+#from openai import OpenAI
+import requests
 
 import os
 
 app = Flask(__name__)
 
-client = OpenAI()
+#client = OpenAI()
 
 app.config["SECRET_KEY"] = "dev-secret-key"
 
@@ -212,6 +213,68 @@ def rate_book(book_id):
     flash("Rating successfully saved!")
 
     return redirect(url_for("book_detail", book_id=book.id))
+
+
+@app.route("/recommendation", methods=["GET", "POST"])
+def recommendation():
+    recommendation_text = None
+    message = None
+
+    if request.method == "POST":
+
+        # Get all books from the database
+        books = db.session.execute(
+            db.select(Book)
+        ).scalars().all()
+
+        if not books:
+            message = "Add some books to your library first."
+
+        else:
+            library_data = []
+
+            for book in books:
+                library_data.append(
+                    f"{book.title} by {book.author.name}, "
+                    f"rating: {book.rating if book.rating else 'not rated'}"
+                )
+
+            library_text = "\n".join(library_data)
+
+            prompt = f"""
+These are the books in my library:
+
+{library_text}
+
+Recommend ONE book that is not already in my library.
+
+Take my ratings into account.
+Books with higher ratings should influence your recommendation more strongly.
+
+Please return:
+- Book title
+- Author
+- A short explanation why you recommend this book
+"""
+
+            response = requests.post(
+                "http://localhost:11434/api/generate",
+                json={
+                    "model": "llama3.2",
+                    "prompt": prompt,
+                    "stream": False
+                }
+            )
+
+            result = response.json()
+
+            recommendation_text = result["response"]
+
+    return render_template(
+        "recommendation.html",
+        recommendation=recommendation_text,
+        message=message
+    )
 
 
 with app.app_context():

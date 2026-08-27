@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Book Recommendation{% endblock %}
+
+{% block content %}
+
+<div class="recommendation-page">
+
+    <h1>✨ What should I read next?</h1>
+
+    <p>
+        Get an AI recommendation based on the books in your library
+        and your ratings.
+    </p>
+
+    <form method="POST">
+
+        <button type="submit" class="primary-button">
+            ✨ Generate recommendation
+        </button>
+
+    </form>
+
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+
+    {% if recommendation %}
+
+        <div class="recommendation-card">
+
+            <h2>Your recommendation</h2>
+
+            <p>
+                {{ recommendation }}
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
